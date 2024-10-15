@@ -8,12 +8,14 @@ import (
     "strings"
 )
 
+// Defines a SlidingQueue struct with three fields: maxSize (maximum size of the queue), queue (a list to store words), and counts (a map to keep track of word frequencies).
 type SlidingQueue struct {
     maxSize int
     queue   *list.List
     counts  map[string]int
 }
 
+//constructor
 func NewSlidingQueue(size int) *SlidingQueue {
     return &SlidingQueue{
         maxSize: size,
@@ -21,7 +23,7 @@ func NewSlidingQueue(size int) *SlidingQueue {
         counts:  make(map[string]int),
     }
 }
-
+//add/remove/update word count
 func (sq *SlidingQueue) Add(word string) {
     if sq.queue.Len() == sq.maxSize {
         // Remove the oldest word
@@ -36,9 +38,11 @@ func (sq *SlidingQueue) Add(word string) {
     sq.counts[word]++
 }
 
+//returns current word counts as a map
 func (sq *SlidingQueue) WordCount() map[string]int {
     return sq.counts
 }
+
 
 func main() {
     sq := NewSlidingQueue(5)
